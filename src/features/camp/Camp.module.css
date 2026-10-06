@@ -270,6 +270,62 @@
   font-size: var(--text-sm);
 }
 
+/* Next on the ridge */
+.nextRidge {
+  margin-top: var(--space-6);
+}
+
+.nextButton {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-panel);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+}
+
+.nextButton:hover .nextTitle,
+.nextButton:hover .nextEmpty {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+
+.nextTitle {
+  font-weight: var(--weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.nextDue {
+  flex: none;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.nextOverdue {
+  color: var(--danger);
+  font-weight: var(--weight-medium);
+}
+
+.nextEmpty {
+  color: var(--ink-soft);
+}
+
+.nextChevron {
+  flex: none;
+  align-self: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--ink-soft);
+}
+
 /* Task sheet */
 .orderControls {
   display: grid;

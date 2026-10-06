@@ -5,8 +5,10 @@ import styles from './Checkbox.module.css';
 interface CheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
-  /** The visible label. The whole row is the hit target. */
+  /** The label. Visible by default, where the whole row is the hit target. */
   children: ReactNode;
+  /** A bare 44 × 44 box whose label is read by assistive tech but not shown. */
+  hideLabel?: boolean;
   className?: string;
   /** Something that floats up from the box when checked (the "+10 m"). */
   overlay?: ReactNode;
@@ -22,12 +24,15 @@ export function Checkbox({
   checked,
   onChange,
   children,
+  hideLabel,
   className,
   overlay,
   disabled,
 }: CheckboxProps) {
   return (
-    <label className={cx(styles.row, disabled && styles.disabled, className)}>
+    <label
+      className={cx(styles.row, hideLabel && styles.bare, disabled && styles.disabled, className)}
+    >
       <input
         type="checkbox"
         className={styles.input}
@@ -41,7 +46,7 @@ export function Checkbox({
         </svg>
         {overlay}
       </span>
-      <span className={styles.label}>{children}</span>
+      <span className={hideLabel ? 'visually-hidden' : styles.label}>{children}</span>
     </label>
   );
 }

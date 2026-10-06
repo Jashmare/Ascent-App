@@ -1,0 +1,16 @@
+.glyph {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+.fill {
+  fill: var(--accent);
+}
+
+.outline {
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}

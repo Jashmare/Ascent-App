@@ -12,6 +12,7 @@ import { completionKey, completionKeys, tasksForDay } from '../../lib/recurrence
 import { streak } from '../../lib/streak';
 import { CarryOverPrompt } from './CarryOverPrompt';
 import { ClimbSummary } from './ClimbSummary';
+import { NextOnRidge } from './NextOnRidge';
 import { QuickAdd } from './QuickAdd';
 import { TaskList } from './TaskList';
 import { TaskSheet } from './TaskSheet';
@@ -84,6 +85,8 @@ export function CampScreen({ route }: { route: Route }) {
           {todays.length > 0 && (
             <ClimbSummary done={doneCount} total={todays.length} streak={streakValue} />
           )}
+
+          <NextOnRidge objectives={objectives} today={today} />
         </>
       )}
 

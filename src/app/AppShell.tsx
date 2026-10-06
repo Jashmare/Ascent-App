@@ -12,6 +12,7 @@ import { GuideScreen } from '../features/guide/GuideScreen';
 import { WeeklyReviewScreen } from '../features/reminders/WeeklyReviewScreen';
 import { RidgeScreen } from '../features/ridge/RidgeScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
+import { ReachSheet } from '../features/sky/ReachSheet';
 import { SkyBackdrop } from '../features/sky/SkyBackdrop';
 import { SkyScreen } from '../features/sky/SkyScreen';
 import { SummitScreen } from '../features/summit/SummitScreen';
@@ -129,6 +130,7 @@ export function AppShell() {
         </AnimatePresence>
       </main>
       <Nav current={isAltitude(route.screen) ? route.screen : null} />
+      <ReachSheet />
       <Toaster />
     </div>
   );

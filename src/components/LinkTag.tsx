@@ -11,9 +11,13 @@ interface LinkTagProps {
 /** A small pill under a title — "⤴ Refresh portfolio". Tapping it opens the linked item. */
 export function LinkTag({ kind, title, onOpen }: LinkTagProps) {
   return (
-    <button type="button" className={styles.tag} onClick={onOpen}>
+    <button
+      type="button"
+      className={styles.tag}
+      aria-label={`Linked ${kind}: ${title}`}
+      onClick={onOpen}
+    >
       <CornerRightUp className={styles.icon} aria-hidden="true" />
-      <span className="visually-hidden">Linked {kind}: </span>
       <span className={styles.text}>{title}</span>
     </button>
   );

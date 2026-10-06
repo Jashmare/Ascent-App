@@ -43,7 +43,12 @@ export default defineConfig({
       },
     }),
   ],
-  server: { port: 5180, strictPort: true },
+  server: {
+    port: 5180,
+    strictPort: true,
+    // Wait for a file write to finish before reloading, so a save is never read half-written.
+    watch: { awaitWriteFinish: { stabilityThreshold: 150, pollInterval: 30 } },
+  },
   preview: { port: 5181, strictPort: true },
   test: {
     environment: 'jsdom',
