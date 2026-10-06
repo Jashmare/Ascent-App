@@ -1,0 +1,32 @@
+.page {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter) calc(var(--nav-height) + var(--space-12) + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 900px) {
+  .page {
+    padding-bottom: var(--space-16);
+  }
+}
+
+.panel {
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+}
+
+.sectionHeading {
+  margin: var(--space-8) 0 var(--space-2);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-grotesk);
+}
+
+.empty {
+  max-width: var(--measure);
+  margin: var(--space-6) 0 var(--space-4);
+  color: var(--ink-soft);
+}

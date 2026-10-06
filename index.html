@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ascent</title>
+    <meta
+      name="description"
+      content="Plan today, aim for the summit, keep your dreams in view. The sky is the limit."
+    />
+    <meta name="theme-color" content="#E9EEEA" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <script>
+      // Resolve the theme before first paint so the screen never flashes the wrong colours.
+      // The real setting lives in IndexedDB; this localStorage mirror is only a UI convenience.
+      (function () {
+        var pref = 'system';
+        try {
+          pref = localStorage.getItem('ascent:theme') || 'system';
+        } catch (e) {}
+        var prefersDark =
+          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var dark = pref === 'dark' || (pref === 'system' && prefersDark);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-altitude', 'camp');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+/*
+ * Ascent design tokens (docs/DESIGN.md §2–4).
+ * Every colour, font, radius and spacing value in the app comes from here.
+ *
+ * Components only ever use the shared names (--ink, --surface, --bg, --accent, ...).
+ * Each altitude maps its own palette onto those names on its container, so components
+ * never need to know which altitude they're in, and altitudes can nest (a strip of Sky
+ * inside Camp, or Camp fading out over the Sky during a transition).
+ */
+
+:root {
+  /* Shared — light theme */
+  --base-scheme: light;
+  --base-ink: #1d2730; /* basalt */
+  --base-ink-soft: #4f5d66; /* slate */
+  --base-surface: #fafbfa; /* snow */
+  --base-line: #cdd6d3; /* rime */
+  --base-danger: #a3402a;
+  /* Text on any --accent fill. --accent is always bright, so this stays basalt in every theme. */
+  --on-accent: #1d2730;
+
+  /* Altitude palettes — light theme */
+  --camp-bg: #e9eeea; /* mist */
+  --camp-accent: #f0b53a; /* sunrise */
+  --camp-accent-strong: #7d5600;
+  --ridge-bg: #dde9e2; /* fir haze */
+  --ridge-accent: #7cc4a0; /* meadow */
+  --ridge-accent-strong: #2b6a4e; /* pine */
+  --summit-bg: #dee8f1; /* glacier */
+  --summit-accent: #9ccbee; /* ice */
+  --summit-accent-strong: #2e5e8e; /* crevasse */
+
+  /* Sky — the same in both themes, slightly deeper in dark */
+  --sky-top: #2a2560; /* dusk */
+  --sky-bottom: #0e1130; /* night */
+  --sky-ink: #eef0ff;
+  --sky-ink-soft: #a9b0d6;
+  --sky-surface: #1b1e47;
+  --sky-line: #3a3f78;
+  --star: #d7deff;
+  --gold: #f5c451;
+  --horizon: #080a22;
+  /* Destructive text on Sky surfaces (the light-theme --danger is too dark to read there). */
+  --sky-danger: #f08a72;
+
+  /* Overlays and depth */
+  --scrim: rgb(8 10 34 / 0.5);
+  --tour-scrim: rgb(8 10 34 / 0.62);
+  --shadow-sheet: 0 -6px 32px rgb(14 17 48 / 0.16), 0 2px 8px rgb(14 17 48 / 0.08);
+  --glow-star: drop-shadow(0 0 4px rgb(215 222 255 / 0.7));
+  --glow-gold: drop-shadow(0 0 5px rgb(245 196 81 / 0.85))
+    drop-shadow(0 0 14px rgb(245 196 81 / 0.45));
+  --label-shadow: 0 1px 3px rgb(5 7 26 / 0.95), 0 0 12px rgb(5 7 26 / 0.8);
+
+  /* Type */
+  --font-grotesk:
+    'Schibsted Grotesk Variable', 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
+  --text-xs: 0.8rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --leading-grotesk: 1.5;
+  --leading-serif: 1.6;
+  --leading-tight: 1.2;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --measure: 70ch;
+
+  /* Spacing — 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii carry hierarchy */
+  --radius-sheet: 24px;
+  --radius-panel: 16px;
+  --radius-control: 12px;
+  --radius-checkbox: 8px;
+  --radius-pill: 999px;
+
+  /* Lines */
+  --border: 1px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+
+  /* Layout */
+  --content-max: 640px;
+  --gutter: 16px;
+  --tap: 44px;
+  --nav-height: 64px;
+  --rail-width: 144px;
+  --glimpse-height: 64px;
+
+  /* Motion (docs/DESIGN.md §6) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-altitude: 260ms;
+  --duration-background: 400ms;
+  --duration-reduced: 120ms;
+  --duration-check: 150ms;
+  --duration-float: 600ms;
+  --duration-sheet: 200ms;
+
+  /* Defaults for anything outside an altitude container */
+  color-scheme: var(--base-scheme);
+  --ink: var(--base-ink);
+  --ink-soft: var(--base-ink-soft);
+  --surface: var(--base-surface);
+  --line: var(--base-line);
+  --danger: var(--base-danger);
+}
+
+@media (min-width: 600px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+/* Dark theme — pre-dawn versions of the lower altitudes. */
+:root[data-theme='dark'] {
+  --base-scheme: dark;
+  --base-ink: #e8edeb;
+  --base-ink-soft: #9fadb3;
+  --base-surface: #1c2428;
+  --base-line: #2e3a3f;
+  --base-danger: #f08a72;
+
+  --camp-bg: #141b1d;
+  --camp-accent: #f0b53a;
+  --camp-accent-strong: #f0b53a;
+  --ridge-bg: #111d18;
+  --ridge-accent: #7cc4a0;
+  --ridge-accent-strong: #7cc4a0;
+  --summit-bg: #111923;
+  --summit-accent: #9ccbee;
+  --summit-accent-strong: #9ccbee;
+
+  --sky-top: #1a1747;
+  --sky-bottom: #05071a;
+  --sky-surface: #12143a;
+  --sky-line: #2c3068;
+  --horizon: #03040f;
+
+  --shadow-sheet: 0 -6px 32px rgb(0 0 0 / 0.45), 0 2px 8px rgb(0 0 0 / 0.3);
+}
+
+/* The three daytime altitudes share ink, surface and line, and differ in bg and accent. */
+[data-altitude='camp'],
+[data-altitude='ridge'],
+[data-altitude='summit'] {
+  color-scheme: var(--base-scheme);
+  --ink: var(--base-ink);
+  --ink-soft: var(--base-ink-soft);
+  --surface: var(--base-surface);
+  --line: var(--base-line);
+  --danger: var(--base-danger);
+}
+
+[data-altitude='camp'] {
+  --bg: var(--camp-bg);
+  --accent: var(--camp-accent);
+  --accent-strong: var(--camp-accent-strong);
+}
+
+[data-altitude='ridge'] {
+  --bg: var(--ridge-bg);
+  --accent: var(--ridge-accent);
+  --accent-strong: var(--ridge-accent-strong);
+}
+
+[data-altitude='summit'] {
+  --bg: var(--summit-bg);
+  --accent: var(--summit-accent);
+  --accent-strong: var(--summit-accent-strong);
+}
+
+/* The Sky is the one dark screen in light mode. */
+[data-altitude='sky'] {
+  color-scheme: dark;
+  --bg: var(--sky-bottom);
+  --ink: var(--sky-ink);
+  --ink-soft: var(--sky-ink-soft);
+  --surface: var(--sky-surface);
+  --line: var(--sky-line);
+  --danger: var(--sky-danger);
+  --accent: var(--gold);
+  --accent-strong: var(--gold);
+}
+
+/* Field borders must reach 3:1 against their surface (WCAG 1.4.11); --line alone is too
+   faint for that. Derived on every altitude container so it follows the local palette. */
+:root,
+[data-altitude] {
+  --field-border: color-mix(in srgb, var(--ink-soft) 70%, var(--surface));
+}

@@ -1,0 +1,27 @@
+/* The only gradient in the app. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+  transition: opacity var(--duration-background) var(--ease-out);
+}
+
+.visible {
+  opacity: 1;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: var(--star);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop {
+    transition-duration: var(--duration-reduced);
+  }
+}

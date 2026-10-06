@@ -1,0 +1,22 @@
+.shell {
+  position: relative;
+  min-height: 100dvh;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+.screen {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+@media (min-width: 900px) {
+  .stage {
+    padding-left: var(--rail-width);
+  }
+}
