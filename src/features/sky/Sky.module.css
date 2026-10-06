@@ -1,3 +1,356 @@
+/* The Sky fills the screen: header, then the starfield down to the horizon. */
+.sky {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 900px) {
+  .sky {
+    padding-bottom: 0;
+  }
+}
+
+.sky .skyTop {
+  padding-bottom: 0;
+}
+
+.totals {
+  margin-top: calc(var(--space-2) * -1);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.viewToggle {
+  padding: 0 var(--space-3);
+}
+
+/* Starfield */
+.field {
+  position: relative;
+  flex: 1;
+  min-height: 460px;
+  overflow: hidden;
+}
+
+.constellation {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.line {
+  stroke: var(--sky-line);
+  stroke-width: 1;
+}
+
+.linePending {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.lineDrawing {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 450ms var(--ease-out) forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.star {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  transform: translate(-50%, -50%);
+}
+
+.star:focus-visible {
+  outline: var(--focus-width) solid var(--gold);
+  outline-offset: var(--focus-offset);
+}
+
+.starShape {
+  width: var(--star-size);
+  height: var(--star-size);
+  overflow: visible;
+}
+
+/* Dream stars: pale, softly twinkling, each on its own slow timing. */
+.pale .starShape {
+  fill: var(--star);
+  filter: var(--glow-star);
+  animation: twinkle var(--twinkle-duration) ease-in-out var(--twinkle-delay) infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+:global(:root[data-tab-hidden]) .pale .starShape {
+  animation-play-state: paused;
+}
+
+/* Reached stars: gold, with a stronger glow. */
+.gold .starShape {
+  fill: var(--gold);
+  filter: var(--glow-gold);
+}
+
+/* The ceremony: the new star waits, then ignites. */
+.pending .starShape {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.igniting .starShape {
+  animation: ignite 650ms var(--ease-out) both;
+}
+
+@keyframes ignite {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pale .starShape,
+  .igniting .starShape,
+  .lineDrawing {
+    animation: none;
+  }
+
+  .lineDrawing {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Labels: Newsreader italic with a dark halo for legibility. */
+.starLabel {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 12px);
+  max-width: min(220px, 45vw);
+  overflow: hidden;
+  color: var(--sky-ink);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  line-height: var(--leading-tight);
+  text-overflow: ellipsis;
+  text-shadow: var(--label-shadow);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+.starLabelLeft {
+  right: calc(50% + 12px);
+  left: auto;
+  text-align: right;
+}
+
+.starLabelResting,
+.star:hover .starLabel,
+.star:focus .starLabel {
+  opacity: 1;
+}
+
+.star:hover,
+.star:focus {
+  z-index: 3;
+}
+
+.emptySky {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  width: min(88%, 26rem);
+  color: var(--sky-ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: var(--leading-serif);
+  text-align: center;
+  text-shadow: var(--label-shadow);
+  transform: translate(-50%, -50%);
+}
+
+/* Horizon: one peak per active summit. */
+.horizon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.horizonSvg {
+  display: block;
+  width: 100%;
+}
+
+.mountain {
+  fill: var(--horizon);
+}
+
+.beacon {
+  fill: var(--sky-ink-soft);
+}
+
+.peak {
+  position: absolute;
+  z-index: 2;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  transform: translate(-50%, -50%);
+}
+
+.peak:focus-visible {
+  outline: var(--focus-width) solid var(--gold);
+  outline-offset: 0;
+}
+
+.peakLabel {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  padding: 2px var(--space-2);
+  border: var(--border) solid var(--sky-line);
+  border-radius: var(--radius-pill);
+  background: var(--sky-surface);
+  color: var(--sky-ink);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.peak:hover .peakLabel,
+.peak:focus .peakLabel {
+  opacity: 1;
+}
+
+.addDream {
+  position: absolute;
+  right: 0;
+  bottom: var(--space-3);
+  left: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.addDreamButton {
+  border-color: var(--sky-line);
+  background: color-mix(in srgb, var(--sky-bottom) 70%, transparent);
+  color: var(--sky-ink);
+  pointer-events: auto;
+}
+
+/* The reaching ceremony */
+.ceremony {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  cursor: pointer;
+}
+
+.ceremonyAnchor {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.ceremonyChip {
+  grid-area: 1 / 1;
+  max-width: 80vw;
+  overflow: hidden;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--sky-surface);
+  box-shadow: var(--ring-gold);
+  color: var(--sky-ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ceremonyLight {
+  grid-area: 1 / 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: var(--halo-gold);
+}
+
+.ceremonyText {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  width: min(90vw, 32rem);
+  margin: 0;
+  color: var(--sky-ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  text-align: center;
+  text-shadow: var(--label-shadow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 400ms var(--ease-out);
+}
+
+.ceremonyTextShown {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceremonyText {
+    transition: none;
+  }
+}
+
 /* Reach prompt */
 .reachTitle {
   margin-bottom: var(--space-4);
@@ -5,4 +358,284 @@
   font-size: var(--text-xl);
   font-weight: var(--weight-medium);
   line-height: var(--leading-tight);
+}
+
+/* Dream and reached-summit sheets */
+.photo {
+  width: 100%;
+  max-height: 320px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-panel);
+  object-fit: cover;
+}
+
+.reachedLine {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent-strong);
+  font-weight: var(--weight-medium);
+}
+
+.reachedLine svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: currentColor;
+}
+
+.reflection {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  line-height: var(--leading-serif);
+}
+
+.dreamSection {
+  margin-top: var(--space-6);
+}
+
+.dreamHeading {
+  margin-bottom: var(--space-1);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.hopeful {
+  max-width: var(--measure);
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: var(--leading-serif);
+  white-space: pre-line;
+}
+
+.vision {
+  font-style: italic;
+}
+
+.mutedText {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.paths > li + li {
+  border-top: var(--border) solid var(--line);
+}
+
+.path {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-2) 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.pathTitle {
+  flex: 1;
+  font-weight: var(--weight-medium);
+}
+
+.pathProgress {
+  color: var(--accent-strong);
+  font-weight: var(--weight-bold);
+}
+
+.pathStar {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+  fill: var(--gold);
+}
+
+.linkRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.added {
+  margin-top: var(--space-6);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.footerSpacer {
+  flex: 1;
+}
+
+.confirmRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.confirmText {
+  flex: 1 1 100%;
+  font-weight: var(--weight-medium);
+}
+
+.photoField {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.photoLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.photoActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.photoButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-control);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.photoButton:hover {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.photoButton:focus-within {
+  outline: var(--focus-width) solid var(--accent-strong);
+  outline-offset: var(--focus-offset);
+}
+
+.photoButton svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.photoError {
+  color: var(--danger);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.milestoneList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: 6px 0;
+}
+
+.milestoneList svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 3px;
+  color: var(--accent-strong);
+}
+
+.dim {
+  opacity: 0.35;
+}
+
+.ledToward {
+  margin-top: var(--space-6);
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  text-align: left;
+}
+
+.ledToward:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* List view */
+.listPage {
+  padding-top: var(--space-2);
+}
+
+.list > li + li {
+  border-top: var(--border) solid var(--line);
+}
+
+.listItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-3) 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.listIcon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 4px;
+}
+
+.listIconPale {
+  color: var(--star);
+  fill: var(--star);
+}
+
+.listIconGold {
+  color: var(--gold);
+  fill: var(--gold);
+}
+
+.listPeak {
+  margin-top: 2px;
+}
+
+.listText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.listDream {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+}
+
+.listSummit {
+  font-weight: var(--weight-bold);
+}
+
+.listWhy {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.listEmpty {
+  color: var(--ink-soft);
 }

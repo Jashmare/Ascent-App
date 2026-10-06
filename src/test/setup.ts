@@ -57,6 +57,7 @@ if (typeof dialogProto.close !== 'function') {
 
 afterEach(async () => {
   cleanup();
+  localStorage.clear();
   window.history.replaceState(null, '', '/');
   await Promise.all(db.tables.map((table) => table.clear()));
 });

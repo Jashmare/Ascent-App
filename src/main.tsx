@@ -13,3 +13,10 @@ createRoot(root).render(
     <App />
   </StrictMode>,
 );
+
+// Development only: `ascentSampleData()` in the console loads a generic sample climb.
+if (import.meta.env.DEV) {
+  void import('./dev/sampleData').then(({ loadSampleData }) => {
+    window.ascentSampleData = loadSampleData;
+  });
+}

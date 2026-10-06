@@ -73,13 +73,6 @@ export function TaskRow({
       >
         <span className={styles.taskTitle}>{task.title}</span>
       </Checkbox>
-      {routine && (
-        <span className={styles.repeatBadge}>
-          <Repeat aria-hidden="true" />
-          <span className="visually-hidden">Repeats </span>
-          {repeatLabel(task.repeat, weekStartsOn)}
-        </span>
-      )}
       <IconButton
         label={`Edit “${task.title}”`}
         icon={<Ellipsis />}
@@ -97,13 +90,22 @@ export function TaskRow({
       >
         <GripVertical aria-hidden="true" />
       </button>
-      {objective && (
+      {(routine || objective) && (
         <div className={styles.taskMeta}>
-          <LinkTag
-            kind="objective"
-            title={objective.title}
-            onOpen={() => openSheet('ridge', `objective:${objective.id}`)}
-          />
+          {routine && (
+            <span className={styles.repeatBadge}>
+              <Repeat aria-hidden="true" />
+              <span className="visually-hidden">Repeats </span>
+              {repeatLabel(task.repeat, weekStartsOn)}
+            </span>
+          )}
+          {objective && (
+            <LinkTag
+              kind="objective"
+              title={objective.title}
+              onOpen={() => openSheet('ridge', `objective:${objective.id}`)}
+            />
+          )}
         </div>
       )}
     </li>

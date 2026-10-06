@@ -12,6 +12,7 @@ import { GuideScreen } from '../features/guide/GuideScreen';
 import { WeeklyReviewScreen } from '../features/reminders/WeeklyReviewScreen';
 import { RidgeScreen } from '../features/ridge/RidgeScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
+import { CeremonyOverlay } from '../features/sky/CeremonyOverlay';
 import { ReachSheet } from '../features/sky/ReachSheet';
 import { SkyBackdrop } from '../features/sky/SkyBackdrop';
 import { SkyScreen } from '../features/sky/SkyScreen';
@@ -84,6 +85,14 @@ export function AppShell() {
     syncThemeColor();
   }, [altitude]);
 
+  // Twinkling pauses while the tab is hidden (docs/DESIGN.md §6.4).
+  useEffect(() => {
+    const sync = () => document.documentElement.toggleAttribute('data-tab-hidden', document.hidden);
+    sync();
+    document.addEventListener('visibilitychange', sync);
+    return () => document.removeEventListener('visibilitychange', sync);
+  }, []);
+
   // On arrival at a new screen: start at the top and move focus to its title, so keyboard
   // and screen reader users land in the right place. Skipped on first load.
   const firstRender = useRef(true);
@@ -131,6 +140,7 @@ export function AppShell() {
       </main>
       <Nav current={isAltitude(route.screen) ? route.screen : null} />
       <ReachSheet />
+      <CeremonyOverlay />
       <Toaster />
     </div>
   );
