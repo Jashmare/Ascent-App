@@ -108,6 +108,17 @@ export function closeSheet(): void {
   else navigate({ screen: route.screen }, { replace: true });
 }
 
+// The last altitude visited, so "Back" from settings, the guide or the review returns there.
+let lastAltitude: Altitude = 'camp';
+
+export function rememberAltitude(screen: Screen): void {
+  if (isAltitude(screen)) lastAltitude = screen;
+}
+
+export function goBack(): void {
+  navigate({ screen: lastAltitude });
+}
+
 /** Splits 'objective:abc' into its kind and id. */
 export function parseOpen(open: string | undefined): { kind: string; id?: string } | null {
   if (!open) return null;

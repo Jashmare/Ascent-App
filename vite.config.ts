@@ -40,6 +40,8 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
+        // Opens the right screen when a reminder notification is tapped.
+        importScripts: ['notification-click.js'],
       },
     }),
   ],

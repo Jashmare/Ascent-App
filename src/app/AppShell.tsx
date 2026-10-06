@@ -8,6 +8,7 @@ import {
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Toaster } from '../components/Toaster';
 import { CampScreen } from '../features/camp/CampScreen';
+import { ReminderRunner } from '../features/reminders/ReminderRunner';
 import { GuideScreen } from '../features/guide/GuideScreen';
 import { WeeklyReviewScreen } from '../features/reminders/WeeklyReviewScreen';
 import { RidgeScreen } from '../features/ridge/RidgeScreen';
@@ -19,7 +20,7 @@ import { SkyScreen } from '../features/sky/SkyScreen';
 import { SummitScreen } from '../features/summit/SummitScreen';
 import { SCREEN_META, travelDirection } from './altitudes';
 import { Nav } from './Nav';
-import { isAltitude, useRoute, type Route, type Screen } from './router';
+import { isAltitude, rememberAltitude, useRoute, type Route, type Screen } from './router';
 import { syncThemeColor } from './theme';
 import styles from './AppShell.module.css';
 
@@ -97,6 +98,7 @@ export function AppShell() {
   // and screen reader users land in the right place. Skipped on first load.
   const firstRender = useRef(true);
   useEffect(() => {
+    rememberAltitude(route.screen);
     document.title = `${SCREEN_META[route.screen].title} · Ascent`;
     if (firstRender.current) {
       firstRender.current = false;
@@ -141,6 +143,7 @@ export function AppShell() {
       <Nav current={isAltitude(route.screen) ? route.screen : null} />
       <ReachSheet />
       <CeremonyOverlay />
+      <ReminderRunner />
       <Toaster />
     </div>
   );

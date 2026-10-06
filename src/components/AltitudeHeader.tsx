@@ -1,5 +1,6 @@
-import { CircleHelp, Settings } from 'lucide-react';
+import { ArrowLeft, CircleHelp, Settings } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { goBack } from '../app/router';
 import { useAppSettings } from '../app/settingsContext';
 import { useToday } from '../app/useToday';
 import { useAltimeter } from '../db/hooks';
@@ -17,6 +18,10 @@ interface AltitudeHeaderProps {
   showAltimeter?: boolean;
   /** Larger serif title, used by the Sky. */
   variant?: 'altitude' | 'sky';
+  /** A back button to the last altitude, for screens outside the climb. */
+  back?: boolean;
+  /** Hide the guide and settings links (on their own screens). */
+  hideLinks?: boolean;
 }
 
 export function AltitudeHeader({
@@ -25,18 +30,28 @@ export function AltitudeHeader({
   actions,
   showAltimeter = true,
   variant = 'altitude',
+  back,
+  hideLinks,
 }: AltitudeHeaderProps) {
   return (
     <header className={cx(styles.header, variant === 'sky' && styles.sky)}>
+      {back && (
+        <button type="button" className={styles.back} onClick={goBack}>
+          <ArrowLeft aria-hidden="true" />
+          Back
+        </button>
+      )}
       <div className={styles.top}>
         <h1 className={styles.title} tabIndex={-1} data-screen-title>
           {title}
         </h1>
         {showAltimeter && <AltimeterReadout />}
-        <div className={styles.tools}>
-          {actions}
-          <HeaderLinks />
-        </div>
+        {(actions || !hideLinks) && (
+          <div className={styles.tools}>
+            {actions}
+            {!hideLinks && <HeaderLinks />}
+          </div>
+        )}
       </div>
       {children && <div className={styles.sub}>{children}</div>}
     </header>

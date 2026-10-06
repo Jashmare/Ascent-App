@@ -8,6 +8,29 @@
   gap: var(--space-3);
 }
 
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap);
+  margin: calc(var(--space-3) * -1) 0 var(--space-2) calc(var(--space-2) * -1);
+  padding: 0 var(--space-3) 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--accent-strong);
+  font-weight: var(--weight-medium);
+}
+
+.back:hover {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.back svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
 .title {
   flex: 1;
   min-width: 0;

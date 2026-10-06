@@ -4,6 +4,7 @@ import './styles/fonts';
 import './styles/tokens.css';
 import './styles/globals.css';
 import { App } from './app/App';
+import { setUpPwa } from './app/pwa';
 
 const root = document.getElementById('root');
 if (!root) throw new Error('Missing #root element in index.html');
@@ -13,6 +14,8 @@ createRoot(root).render(
     <App />
   </StrictMode>,
 );
+
+setUpPwa();
 
 // Development only: `ascentSampleData()` in the console loads a generic sample climb.
 if (import.meta.env.DEV) {

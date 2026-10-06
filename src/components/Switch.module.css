@@ -1,0 +1,71 @@
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--tap);
+  padding: var(--space-2) 0;
+  cursor: pointer;
+}
+
+.text {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-weight: var(--weight-medium);
+}
+
+.description {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.input {
+  position: absolute;
+  right: 0;
+  width: 52px;
+  height: 32px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.track {
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 32px;
+  border: 1.5px solid var(--field-border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  transform: translateY(-50%);
+}
+
+.input:checked + .track {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.input:checked + .track .thumb {
+  left: calc(100% - 26px);
+  background: var(--on-accent);
+}
+
+.input:focus-visible + .track {
+  outline: var(--focus-width) solid var(--accent-strong);
+  outline-offset: var(--focus-offset);
+}
