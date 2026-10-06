@@ -1,0 +1,75 @@
+.fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.even {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 2px;
+}
+
+.chip {
+  position: relative;
+  display: flex;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.face {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: var(--border) solid var(--field-border);
+  border-radius: var(--radius-pill);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.even .face {
+  padding: 0;
+}
+
+.input:hover + .face {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.input:checked + .face {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.input:focus-visible + .face {
+  outline: var(--focus-width) solid var(--accent-strong);
+  outline-offset: var(--focus-offset);
+}

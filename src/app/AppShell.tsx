@@ -6,6 +6,7 @@ import {
   type Variants,
 } from 'motion/react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Toaster } from '../components/Toaster';
 import { CampScreen } from '../features/camp/CampScreen';
 import { GuideScreen } from '../features/guide/GuideScreen';
 import { WeeklyReviewScreen } from '../features/reminders/WeeklyReviewScreen';
@@ -128,6 +129,7 @@ export function AppShell() {
         </AnimatePresence>
       </main>
       <Nav current={isAltitude(route.screen) ? route.screen : null} />
+      <Toaster />
     </div>
   );
 }

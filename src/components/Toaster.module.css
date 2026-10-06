@@ -1,0 +1,75 @@
+.region {
+  position: fixed;
+  right: 0;
+  bottom: calc(var(--nav-height) + var(--space-3) + env(safe-area-inset-bottom));
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .region {
+    bottom: var(--space-6);
+    left: var(--rail-width);
+  }
+}
+
+/* Inverted colours stand out without a shadow (only sheets cast one). */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: calc(var(--content-max) - var(--space-12));
+  min-height: var(--tap);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--ink);
+  color: var(--surface);
+  pointer-events: auto;
+}
+
+.message {
+  flex: 1;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.action {
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--surface);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--surface);
+}
+
+.close svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.action:focus-visible,
+.close:focus-visible {
+  outline-color: var(--surface);
+  outline-offset: -4px;
+}

@@ -1,0 +1,29 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.rest,
+.walked {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rest {
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.walked {
+  stroke: var(--accent-strong);
+  stroke-width: 3;
+}
+
+.dot {
+  fill: var(--accent-strong);
+  stroke: var(--surface);
+  stroke-width: 2.5;
+}

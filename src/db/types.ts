@@ -7,10 +7,7 @@ export type Timestamp = number;
 
 /** How a task repeats. Days are 0 = Sunday … 6 = Saturday. */
 export type Repeat =
-  | { kind: 'none' }
-  | { kind: 'daily' }
-  | { kind: 'weekdays' }
-  | { kind: 'days'; days: number[] };
+  { kind: 'none' } | { kind: 'daily' } | { kind: 'weekdays' } | { kind: 'days'; days: number[] };
 
 export interface Task {
   id: string;

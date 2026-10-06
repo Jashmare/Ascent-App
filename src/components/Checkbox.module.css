@@ -1,0 +1,82 @@
+.row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--tap);
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.input {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--ink-soft);
+  border-radius: var(--radius-checkbox);
+  background: var(--surface);
+}
+
+.input:checked + .box {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.input:focus-visible + .box {
+  outline: var(--focus-width) solid var(--accent-strong);
+  outline-offset: var(--focus-offset);
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+}
+
+.mark {
+  fill: none;
+  stroke: var(--on-accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+/* The check mark draws in (docs/DESIGN.md §6.2). Unchecking is instant. */
+.input:checked + .box .mark {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--duration-check) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input:checked + .box .mark {
+    transition: none;
+  }
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+  overflow-wrap: anywhere;
+}

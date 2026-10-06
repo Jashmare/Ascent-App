@@ -1,13 +1,8 @@
-import { render, screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { setSetting } from '../db/settings';
-import { App } from './App';
+import { screen, within } from '@testing-library/react';
+import { renderApp as renderAt } from '../test/renderApp';
 
 async function renderApp() {
-  await setSetting('onboarded', true);
-  await setSetting('tourDone', true);
-  const user = userEvent.setup();
-  render(<App />);
+  const { user } = await renderAt('#/camp');
   await screen.findByRole('heading', { level: 1, name: 'Camp' });
   return user;
 }

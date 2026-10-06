@@ -1,0 +1,112 @@
+.sheet {
+  width: 100%;
+  max-width: 100%;
+  max-height: calc(100dvh - var(--space-6));
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-sheet);
+  overflow: hidden;
+}
+
+.sheet[open] {
+  display: flex;
+  flex-direction: column;
+  animation: sheet-up var(--duration-sheet) var(--ease-out);
+}
+
+.sheet::backdrop {
+  background: var(--scrim, rgb(8 10 34 / 0.5));
+}
+
+/* In the Sky, depth comes from glow, not shadow. */
+:global([data-altitude='sky']) .sheet {
+  box-shadow:
+    0 0 0 var(--border) var(--line),
+    0 -8px 48px color-mix(in srgb, var(--sky-top) 75%, transparent);
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(32px);
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .sheet {
+    width: calc(100% - var(--space-12));
+    max-width: 560px;
+    max-height: min(780px, calc(100dvh - var(--space-16)));
+    margin: auto;
+    border-radius: var(--radius-sheet);
+  }
+
+  .sheet[open] {
+    animation-name: sheet-in;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet[open] {
+    animation: none;
+  }
+}
+
+.header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2) var(--space-2) var(--gutter);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  padding-top: 9px;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  overflow-wrap: anywhere;
+}
+
+.serif .title {
+  padding-top: 4px;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-2) var(--gutter) var(--space-6);
+}
+
+.footer {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--gutter) calc(var(--space-4) + env(safe-area-inset-bottom));
+  border-top: var(--border) solid var(--line);
+}
+
+@media (min-width: 600px) {
+  .footer {
+    padding-bottom: var(--space-4);
+  }
+}
