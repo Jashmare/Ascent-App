@@ -105,7 +105,8 @@
 .leads {
   justify-self: start;
   min-height: var(--tap);
-  margin-left: calc(32px + var(--space-3) + var(--space-2));
+  /* Glyph and gap, so the text lines up with the title (the padding supplies the rest). */
+  margin-left: calc(32px + var(--space-3));
   padding: 0 var(--space-2);
   border: 0;
   border-radius: var(--radius-control);

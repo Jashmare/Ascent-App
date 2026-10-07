@@ -10,6 +10,10 @@ Everything stays on your device (IndexedDB). It installs as an app and works off
   or Settings → Guide), along with a one-minute guided tour.
 - Product spec: [docs/PRODUCT.md](docs/PRODUCT.md) · Design system: [docs/DESIGN.md](docs/DESIGN.md)
 
+| Camp                                                                           | Ridge                                                               | Summit                                                                   | Sky                                                                                | Guided tour                                                             |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ![Camp: today's tasks, the climb line and a streak](docs/screenshots/camp.jpg) | ![Ridge: objectives grouped by horizon](docs/screenshots/ridge.jpg) | ![Summit: long-term goals with peak glyphs](docs/screenshots/summit.jpg) | ![Sky: dreams as stars, a constellation and the horizon](docs/screenshots/sky.jpg) | ![The tour spotlighting the quick add field](docs/screenshots/tour.jpg) |
+
 ## Run it
 
 Requires Node 22.12 or later (Node 24 recommended).
@@ -21,16 +25,16 @@ npm run dev
 
 Then open http://localhost:5180.
 
-| Command | What it does |
-|---|---|
-| `npm run dev` | Development server at http://localhost:5180 |
-| `npm run build` | Type-check and build to `dist/`, with the service worker |
-| `npm run preview` | Serve the production build at http://localhost:5181 |
-| `npm run test` | Run all tests once (`npm run test:watch` to keep watching) |
-| `npm run lint` | ESLint, including accessibility rules |
-| `npm run typecheck` | TypeScript in strict mode |
-| `npm run format` | Prettier |
-| `npm run icons` | Regenerate the PNG icons from `public/logo.svg` |
+| Command             | What it does                                               |
+| ------------------- | ---------------------------------------------------------- |
+| `npm run dev`       | Development server at http://localhost:5180                |
+| `npm run build`     | Type-check and build to `dist/`, with the service worker   |
+| `npm run preview`   | Serve the production build at http://localhost:5181        |
+| `npm run test`      | Run all tests once (`npm run test:watch` to keep watching) |
+| `npm run lint`      | ESLint, including accessibility rules                      |
+| `npm run typecheck` | TypeScript in strict mode                                  |
+| `npm run format`    | Prettier                                                   |
+| `npm run icons`     | Regenerate the PNG icons from `public/logo.svg`            |
 
 ## Install it on a phone
 
