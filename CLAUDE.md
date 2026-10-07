@@ -46,10 +46,15 @@ Use current stable versions of each package.
 
 Fill these in once the project is scaffolded, and keep them up to date.
 
-- `npm run dev`
-- `npm run build`
-- `npm run test`
-- `npm run lint`
+- `npm run dev` — dev server at http://localhost:5180
+- `npm run build` — type-check, then build to `dist/` with the service worker
+- `npm run preview` — serve the production build at http://localhost:5181
+- `npm run test` — all tests once (`npm run test:watch` to watch)
+- `npm run lint` — ESLint with accessibility rules
+- `npm run typecheck` — TypeScript, strict
+- `npm run format` — Prettier
+- Dev only: `ascentSampleData()` in the console loads a generic sample climb; `/?now=2026-10-12T07:00`
+  shifts the app's clock (clear with `/?now=`)
 
 ## Project structure
 
