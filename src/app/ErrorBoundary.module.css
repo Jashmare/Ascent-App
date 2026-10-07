@@ -1,0 +1,30 @@
+.recovery {
+  display: grid;
+  align-content: center;
+  gap: var(--space-4);
+  max-width: 32rem;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--space-12) var(--gutter);
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+
+.text {
+  color: var(--ink-soft);
+}
+
+.button {
+  justify-self: start;
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: var(--weight-medium);
+}

@@ -8,6 +8,7 @@ import {
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Toaster } from '../components/Toaster';
 import { CampScreen } from '../features/camp/CampScreen';
+import { Tour } from '../features/guide/Tour';
 import { ReminderRunner } from '../features/reminders/ReminderRunner';
 import { GuideScreen } from '../features/guide/GuideScreen';
 import { WeeklyReviewScreen } from '../features/reminders/WeeklyReviewScreen';
@@ -144,6 +145,7 @@ export function AppShell() {
       <ReachSheet />
       <CeremonyOverlay />
       <ReminderRunner />
+      <Tour />
       <Toaster />
     </div>
   );

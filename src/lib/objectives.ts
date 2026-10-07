@@ -97,6 +97,11 @@ export function nextOnRidge(objectives: Objective[]): Objective | undefined {
   )[0];
 }
 
+/** Open objectives due on a given day. */
+export function dueOn(objectives: Objective[], date: ISODate): Objective[] {
+  return objectives.filter((o) => o.status === 'open' && o.dueDate === date);
+}
+
 /** How many times tasks linked to an objective have been completed. */
 export function linkedTasksDone(
   objectiveId: string,

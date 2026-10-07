@@ -4,9 +4,15 @@ import { App } from '../../app/App';
 import { db } from '../../db/db';
 import { at, makeDream, makeGoal, makeMilestone } from '../../test/factories';
 import { renderApp, setToday } from '../../test/renderApp';
+import { cancelReach, endCeremony } from './reach';
 
 beforeEach(() => setToday(2026, 10, 7));
-afterEach(() => vi.useRealTimers());
+afterEach(() => {
+  // The reach flow lives outside React; never let one test's ceremony leak into the next.
+  cancelReach();
+  endCeremony();
+  vi.useRealTimers();
+});
 
 describe('Sky', () => {
   it('starts open, and adds a dream that becomes a star', async () => {

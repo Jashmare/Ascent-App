@@ -1,0 +1,190 @@
+.step {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.count {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.heading {
+  margin-top: calc(var(--space-3) * -1);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+
+.heading:focus {
+  outline: none;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.lead {
+  font-size: var(--text-lg);
+}
+
+.note {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+.subheading {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.doneList li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+}
+
+.doneList svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent-strong);
+}
+
+.checkRow + .checkRow {
+  border-top: var(--border) solid var(--line);
+}
+
+.due {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.overdue {
+  color: var(--danger);
+}
+
+.summitHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.summitTitle {
+  flex: 1;
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  text-align: left;
+}
+
+.summitTitle:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.percent {
+  color: var(--accent-strong);
+  font-weight: var(--weight-bold);
+}
+
+.slider {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.slider input {
+  width: 100%;
+  min-height: var(--tap);
+  accent-color: var(--accent-strong);
+}
+
+/* A piece of the Sky, set in the serif: something hoped for. */
+.dream {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-radius: var(--radius-panel);
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+  color: var(--sky-ink);
+}
+
+.dreamLead {
+  color: var(--sky-ink-soft);
+  font-size: var(--text-sm);
+}
+
+.dreamTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+.dreamText {
+  max-width: var(--measure);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: var(--leading-serif);
+}
+
+.vision {
+  font-style: italic;
+}
+
+.addRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4);
+}
+
+.addInput {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--tap);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--ink);
+}
+
+.addInput::placeholder {
+  color: var(--ink-soft);
+  opacity: 1;
+}
+
+.weekList {
+  border-top: var(--border) solid var(--line);
+  padding: var(--space-2) var(--space-4) var(--space-3);
+}
+
+.weekList li {
+  padding: var(--space-1) 0;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.nav > :only-child {
+  margin-left: auto;
+}

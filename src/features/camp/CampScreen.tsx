@@ -8,6 +8,9 @@ import { useCompletions, useDreams, useGoals, useObjectives, useTasks } from '..
 import { unfinishedEarlier } from '../../lib/carryOver';
 import { formatLongDate } from '../../lib/dates';
 import { greeting } from '../../lib/format';
+import { dueOn, nextOnRidge } from '../../lib/objectives';
+import { TourPrompt } from '../guide/TourPrompt';
+import { CampReminders } from '../reminders/CampReminders';
 import { completionKey, completionKeys, tasksForDay } from '../../lib/recurrence';
 import { streak } from '../../lib/streak';
 import { CarryOverPrompt } from './CarryOverPrompt';
@@ -51,6 +54,11 @@ export function CampScreen({ route }: { route: Route }) {
 
   const loaded = tasks !== undefined && completions !== undefined && objectives !== undefined;
   const doneCount = todays.filter((t) => doneKeys.has(completionKey(t.id, today))).length;
+  // Objectives due today show as reminders above the tasks; "Next on the ridge" then looks
+  // past them, and steps aside if nothing else is open.
+  const dueToday = settings.reminders.objectiveDue.on ? dueOn(objectives ?? [], today) : [];
+  const beyondToday = (objectives ?? []).filter((o) => !dueToday.includes(o));
+  const showNext = dueToday.length === 0 || nextOnRidge(beyondToday) !== undefined;
   const open = parseOpen(route.open);
   const editing = open?.kind === 'task' ? tasks?.find((t) => t.id === open.id) : undefined;
 
@@ -69,6 +77,8 @@ export function CampScreen({ route }: { route: Route }) {
 
         {loaded && (
           <>
+            <TourPrompt />
+            <CampReminders dueToday={dueToday} today={today} />
             {carryOver.length > 0 && <CarryOverPrompt tasks={carryOver} today={today} />}
 
             {todays.length === 0 && (
@@ -95,7 +105,7 @@ export function CampScreen({ route }: { route: Route }) {
               <ClimbSummary done={doneCount} total={todays.length} streak={streakValue} />
             )}
 
-            <NextOnRidge objectives={objectives} today={today} />
+            {showNext && <NextOnRidge objectives={beyondToday} today={today} />}
           </>
         )}
 

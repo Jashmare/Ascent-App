@@ -1,0 +1,94 @@
+/* A full-screen, transparent modal: the spotlight and card are drawn inside it. */
+.tour {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.tour::backdrop {
+  background: transparent;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--tour-scrim, rgb(8 10 34 / 0.62));
+}
+
+.clear {
+  position: absolute;
+  inset: 0;
+}
+
+/* The spotlight dims everything around the element it points at. */
+.spot {
+  position: absolute;
+  border-radius: var(--radius-panel);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 0 9999px var(--tour-scrim, rgb(8 10 34 / 0.62));
+  pointer-events: none;
+}
+
+.card {
+  position: absolute;
+  right: var(--gutter);
+  left: var(--gutter);
+  display: grid;
+  gap: var(--space-2);
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-sheet);
+  background: var(--surface);
+  box-shadow: var(--shadow-sheet);
+}
+
+.centred {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.count {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+
+.body {
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.skip {
+  margin-left: auto;
+}
+
+@media (min-width: 900px) {
+  .card {
+    left: calc(var(--rail-width) + var(--gutter));
+  }
+}
