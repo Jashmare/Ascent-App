@@ -9,6 +9,8 @@ Everything stays on your device (IndexedDB). It installs as an app and works off
 - How to use the app: [docs/GUIDE.md](docs/GUIDE.md), also built into the app (the **?** button,
   or Settings → Guide), along with a one-minute guided tour.
 - Product spec: [docs/PRODUCT.md](docs/PRODUCT.md) · Design system: [docs/DESIGN.md](docs/DESIGN.md)
+- Picking the project back up: [docs/CONTEXT.md](docs/CONTEXT.md) (status, architecture,
+  decisions and next steps in one page)
 
 | Camp                                                                           | Ridge                                                               | Summit                                                                   | Sky                                                                                | Guided tour                                                             |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
