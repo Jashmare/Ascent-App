@@ -60,3 +60,14 @@
   flex-wrap: wrap;
   gap: var(--space-2);
 }
+
+.restore {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: var(--border) solid var(--line);
+}
+
+.restoreLead {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}

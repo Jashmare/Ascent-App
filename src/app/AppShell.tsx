@@ -6,7 +6,6 @@ import {
   type Variants,
 } from 'motion/react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Toaster } from '../components/Toaster';
 import { CampScreen } from '../features/camp/CampScreen';
 import { Tour } from '../features/guide/Tour';
 import { ReminderRunner } from '../features/reminders/ReminderRunner';
@@ -146,7 +145,6 @@ export function AppShell() {
       <CeremonyOverlay />
       <ReminderRunner />
       <Tour />
-      <Toaster />
     </div>
   );
 }

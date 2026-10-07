@@ -9,7 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       // Registration happens in src/app/pwa.ts so it can report "ready to work offline".
       injectRegister: false,
-      includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon-180x180.png'],
+      // The glob below already precaches every icon, so don't list them a second time.
+      includeManifestIcons: false,
       manifest: {
         id: '/',
         name: 'Ascent',
@@ -52,6 +53,24 @@ export default defineConfig({
     watch: { awaitWriteFinish: { stabilityThreshold: 150, pollInterval: 30 } },
   },
   preview: { port: 5181, strictPort: true },
+  build: {
+    rolldownOptions: {
+      output: {
+        // Libraries change far less often than the app, so they get their own long-lived
+        // chunks: an update to Ascent doesn't re-download React.
+        codeSplitting: {
+          groups: [
+            {
+              name: 'react',
+              test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+              priority: 2,
+            },
+            { name: 'libs', test: /node_modules[\\/]/, priority: 1 },
+          ],
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,

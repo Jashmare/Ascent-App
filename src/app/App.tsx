@@ -1,3 +1,4 @@
+import { Toaster } from '../components/Toaster';
 import type { Settings } from '../db/settings';
 import { useSettings } from '../db/settings';
 import { Onboarding } from '../features/onboarding/Onboarding';
@@ -18,6 +19,8 @@ function LoadedApp({ settings }: { settings: Settings }) {
   return (
     <SettingsContext value={settings}>
       {settings.onboarded ? <AppShell /> : <Onboarding />}
+      {/* Messages can arrive before the first run is done ("Ready to work offline"). */}
+      <Toaster />
     </SettingsContext>
   );
 }

@@ -1,4 +1,6 @@
-import { screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { App } from '../../app/App';
 import { createBackup } from '../../db/backup';
 import { db } from '../../db/db';
 import { getSettings } from '../../db/settings';
@@ -108,6 +110,25 @@ describe('Settings', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'Camp' })).toBeInTheDocument();
     expect(await db.dreams.count()).toBe(1);
     expect(await screen.findByRole('checkbox', { name: 'Morning walk' })).toBeInTheDocument();
+  });
+
+  it('restores a backup straight from the welcome screen of a fresh install', async () => {
+    await db.dreams.add(makeDream({ title: 'A studio by the sea' }));
+    const file = new File([JSON.stringify(await createBackup())], 'ascent-backup.json', {
+      type: 'application/json',
+    });
+    await Promise.all(db.tables.map((table) => table.clear()));
+    const user = userEvent.setup();
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'Start with the sky.' })).toBeInTheDocument();
+    await user.upload(screen.getByLabelText('Restore a backup'), file);
+    const sheet = await screen.findByRole('dialog', { name: 'Restore a backup' });
+    await user.click(within(sheet).getByRole('button', { name: 'Restore' }));
+
+    // Restored data skips the welcome and lands on Camp, with the dream in the glimpse.
+    expect(await screen.findByRole('heading', { level: 1, name: 'Camp' })).toBeInTheDocument();
+    expect(await screen.findByText('A studio by the sea')).toBeInTheDocument();
   });
 
   it('explains when a file isn’t a backup', async () => {

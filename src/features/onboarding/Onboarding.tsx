@@ -7,6 +7,7 @@ import { TextField } from '../../components/Field';
 import { addDream } from '../../db/dreams';
 import { setSetting } from '../../db/settings';
 import { addTask } from '../../db/tasks';
+import { RestoreBackup } from '../settings/RestoreBackup';
 import { SkyBackdrop } from '../sky/SkyBackdrop';
 import styles from './Onboarding.module.css';
 
@@ -103,6 +104,10 @@ export function Onboarding() {
               </Button>
             </div>
           </form>
+          <div className={styles.restore}>
+            <p className={styles.restoreLead}>Moving from another phone or browser?</p>
+            <RestoreBackup variant="link" />
+          </div>
         </main>
       </div>
     );
