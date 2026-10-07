@@ -41,8 +41,8 @@ backend. Installable and offline.
 
 ## Stack (current stable as of Oct 2026, with deliberate pins)
 
-React 19.3 · Vite 8.3 (Rolldown) · TypeScript **6.0.3** strict (TS 7 isn't supported by
-typescript-eslint yet) · Dexie 4.4 + dexie-react-hooks · date-fns 4 · motion 14 · lucide-react 1.52
+React 19.3 · Vite 8.3 (Rolldown) · TypeScript **6.0.3** strict (typescript-eslint 8.71 only
+supports TS < 6.1) · Dexie 4.4 + dexie-react-hooks · date-fns 4 · motion 14 · lucide-react 1.52
 · vite-plugin-pwa 2.0 (generateSW, Workbox 7) · Fontsource variable fonts (Schibsted Grotesk,
 Newsreader with opsz) · Vitest 5 + React Testing Library 16 + jsdom **29** (30 needs Node ≥24.15)
 + fake-indexeddb · ESLint **10** + typescript-eslint 8.71 + react-hooks 7 (compiler rules) +
@@ -50,6 +50,8 @@ Newsreader with opsz) · Vitest 5 + React Testing Library 16 + jsdom **29** (30 
 Prettier 3. Node 22.12+ required (machine has 24.13).
 
 ## Commands
+
+On a new machine: `git clone https://github.com/Jashmare/Ascent-App.git`, then `npm install`.
 
 ```
 npm run dev        # http://localhost:5180
@@ -88,7 +90,8 @@ src/
               (runner, notifications, weekly review, Camp banners), settings (incl. RestoreBackup),
               onboarding, guide (GuideScreen, Tour, tourState, tourSteps, TourPrompt)
   components/ Button, Sheet (native <dialog> showModal), Field, Chips, Checkbox, Switch, Menu,
-              LinkTag, ClimbLine, PeakGlyph, Tabular, Toaster, Page/Panel, AltitudeHeader
+              LinkTag, ClimbLine, PeakGlyph, Tabular, Toaster, Page/Panel, AltitudeHeader,
+              BlobImage (shows a stored photo Blob via an object URL)
   styles/     tokens.css (all colours, per altitude and theme), globals.css, fonts.ts
   dev/        sampleData.ts (dev only)
 ```
